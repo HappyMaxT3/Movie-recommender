@@ -1,69 +1,94 @@
-from kivy.app import App
-from kivy.lang import Builder
-from kivy.uix.boxlayout import BoxLayout
 import os
 
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.button import Button
+
 from app.omdb_api import search_movies, get_movie_details
-from app.user_profile import add_to_library, add_rating
+from app.user_profile import add_to_library, add_rating, get_user_data
 
 
-class MainLayout(BoxLayout):
+class SearchScreen(Screen):
     def search(self):
         query = self.ids.search_input.text
         results = search_movies(query)
 
-        if not results:
-            self.ids.results_label.text = "No movies found"
-            return
+        self.ids.results_list.clear_widgets()
 
-        text = ""
-        for i, movie in enumerate(results[:5]):
-            text += f"{i+1}. {movie['Title']} ({movie['Year']})\n"
+        for movie in results[:10]:
+            btn = Button(
+                text=f"{movie['Title']} ({movie['Year']})",
+                size_hint_y=None,
+                height=40
+            )
+            btn.bind(on_press=lambda x, m=movie: self.open_movie(m))
+            self.ids.results_list.add_widget(btn)
 
-        self.results = results
-        self.ids.results_label.text = text
+    def open_movie(self, movie):
+        details = get_movie_details(movie["imdbID"])
+        details_screen = self.manager.get_screen("details")
 
-    def select_movie(self):
-        try:
-            index = int(self.ids.choice_input.text) - 1
-            selected = self.results[index]
-        except:
-            self.ids.results_label.text = "Invalid choice"
-            return
+        details_screen.movie = details
+        details_screen.ids.title.text = f"{details['title']} ({details['year']})"
+        details_screen.ids.genre.text = details["genre"]
+        details_screen.ids.overview.text = details["overview"]
 
-        details = get_movie_details(selected["imdbID"])
-        self.selected_movie = details
+        self.manager.current = "details"
 
-        self.ids.results_label.text = f"""
-{details['title']} ({details['year']})
-{details['genre']}
+    def open_library(self):
+        self.manager.current = "library"
 
-{details['overview'][:200]}...
-"""
 
+def open_library(self):
+    self.manager.current = "library"
+
+
+class DetailsScreen(Screen):
     def add_movie(self):
-        if hasattr(self, "selected_movie"):
-            add_to_library(self.selected_movie)
-            self.ids.results_label.text = "Added to library!"
-
-    def rate_movie(self):
-        if not hasattr(self, "selected_movie"):
-            self.ids.results_label.text = "Select movie first"
-            return
+        add_to_library(self.movie)
 
         try:
             rating = float(self.ids.rating_input.text)
-            add_rating(self.selected_movie["title"], rating)
-            self.ids.results_label.text = "Rating saved!"
+            add_rating(self.movie["title"], rating)
         except:
-            self.ids.results_label.text = "Invalid rating"
+            pass
+
+        self.manager.current = "search"
+
+
+class LibraryScreen(Screen):
+    def on_enter(self):
+        user = get_user_data()
+
+        library = user.get("library", [])
+        ratings = user.get("ratings", {})
+
+        text = ""
+
+        if not library:
+            text = "Library is empty"
+        else:
+            for movie in library:
+                rating = ratings.get(movie["title"], "—")
+
+                text += f"\n{movie['title']} ({movie['year']})\n"
+                text += f"Genre: {movie['genre']}\n"
+                text += f"Rating: {rating}\n"
+                text += f"{movie['overview'][:150]}...\n"
+                text += "-" * 40 + "\n"
+
+        self.ids.library_list.text = text
+
+
+class RootWidget(ScreenManager):
+    pass
 
 
 class MovieApp(App):
     def build(self):
         kv_path = os.path.join(os.path.dirname(__file__), "ui.kv")
-        Builder.load_file(kv_path)
-        return MainLayout()
+        return Builder.load_file(kv_path)
 
 
 if __name__ == "__main__":

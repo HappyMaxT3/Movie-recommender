@@ -1,9 +1,10 @@
 {
   "user_id": 1,
   "ratings": {
-    "Blade": 4.7,
+    "Blade": 4.6,
     "Blade II": 3.9,
-    "Blade Runner 2049": 4.9
+    "Blade Runner 2049": 4.9,
+    "The Batman": 3.8
   },
   "library": [
     {
@@ -19,6 +20,13 @@
       "year": "2002",
       "overview": "A rare mutation has occurred within the vampire community. The Reaper. A vampire so consumed with an insatiable bloodlust that they prey on vampires as well as humans, transforming victims who are unlucky enough to survive into Reapers themselves. Now their quickly expanding population threatens the existence of vampires, and soon there won't be enough humans in the world to satisfy their bloodlust. Blade, Whistler and an armory expert named Scud are curiously summoned by the Shadow Council. The council reluctantly admits that they are in a dire situation and they require Blade's assistance. Blade then tenuously enters into an alliance with The Bloodpack, an elite team of vampires trained in all modes of combat to defeat the Reaper threat. Blade's team and the Bloodpack are the only line of defense which can prevent the Reaper population from wiping out the vampire and human populations.",
       "genre": "Action, Horror, Sci-Fi"
+    },
+    {
+      "id": "tt1877830",
+      "title": "The Batman",
+      "year": "2022",
+      "overview": "When a sadistic serial killer begins murdering key political figures in Gotham, the Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
+      "genre": "Action, Crime, Drama"
     }
   ]
 }
