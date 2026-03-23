@@ -14,30 +14,39 @@ ScreenManager:
         padding: 10
         spacing: 10
 
+        # Поисковая строка
         TextInput:
             id: search_input
             hint_text: "Enter movie name"
             size_hint_y: None
             height: 40
 
-        Button:
-            text: "Search"
+        BoxLayout:
             size_hint_y: None
             height: 40
-            on_press: root.search()
+            spacing: 10
 
-        Button:
-            text: "View Library"
-            size_hint_y: None
-            height: 40
-            on_press: root.open_library()
+            Button:
+                text: "Search"
+                on_press: root.search_movie()
 
+            Button:
+                text: "Refresh Recommendations"
+                on_press: root.refresh_recommendations()
+
+            Button:
+                text: "Library"
+                on_press: root.open_library()
+
+        # Список результатов и рекомендаций
         ScrollView:
             GridLayout:
                 id: results_list
                 cols: 1
                 size_hint_y: None
                 height: self.minimum_height
+                row_default_height: 40
+                row_force_default: True
 
 
 <DetailsScreen>:
