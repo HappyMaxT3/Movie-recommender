@@ -1,4 +1,3 @@
-# ui/library_screen.py
 from kivy.uix.screenmanager import Screen
 from app.user_profile import get_user_data
 

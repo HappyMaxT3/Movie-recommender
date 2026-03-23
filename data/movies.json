@@ -7439,5 +7439,61 @@
     "year": "2006",
     "overview": "Four nations lived together in harmony. Everything changed when the fire nation attacked. Only the avatar master of all four elements could keep balance but when the world needed him most, he vanished. Two bother and sister discovered an avatar, an air bender named Aang. Although his air skills are great, he got a lot to learn before he saves anyone.",
     "genre": "Action, Adventure, Fantasy"
+  },
+  {
+    "id": "tt0103644",
+    "title": "Alien³",
+    "year": "1992",
+    "overview": "Ellen Ripley (Sigourney Weaver) is the only survivor when she crash lands on Fiorina 161, a bleak wasteland inhabited by former inmates of the planet's maximum security prison. Once again, Ripley must face skepticism and the alien as it hunts down the prisoners and guards. Without weapons or modern technology of any kind, Ripley leads the men into battle against the terrifying creature.",
+    "genre": "Action, Horror, Sci-Fi"
+  },
+  {
+    "id": "tt2316204",
+    "title": "Alien: Covenant",
+    "year": "2017",
+    "overview": "In 2104, almost eleven years after the disastrous expedition to the distant moon, LV-223, in Prometheus (2012), the deep-space colonisation vessel, USCSS Covenant, is on course for the remote planet, Origae-6, with more than 2,000 colonists in cryogenic hibernation to build a new world. Instead, a rogue transmission entices the crew to a nearby habitable planet which resembles Earth. As a result, the unsuspecting crewmembers of the Covenant will have to cope with biological foes beyond human comprehension. Now, what started as a peaceful exploratory mission, will soon turn into a desperate rescue operation in uncharted space. Is there an escape from the treacherous, mysterious planet?",
+    "genre": "Horror, Sci-Fi, Thriller"
+  },
+  {
+    "id": "tt0118583",
+    "title": "Alien: Resurrection",
+    "year": "1997",
+    "overview": "The saga continues 200 years after Ripley sacrificed herself for the sake of humanity. Her erstwhile employers long gone, this time it is the military that resurrects the one-woman killing machine through genetic cloning to extract the alien from within her, but during the process her DNA is fused with the queen and then the aliens escape. Now Ripley must decide where her allegiance lies.",
+    "genre": "Action, Horror, Sci-Fi"
+  },
+  {
+    "id": "tt18412256",
+    "title": "Alien: Romulus",
+    "year": "2024",
+    "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonists come face to face with the most terrifying life form in the universe.",
+    "genre": "Horror, Sci-Fi, Thriller"
+  },
+  {
+    "id": "tt0370263",
+    "title": "Alien vs. Predator",
+    "year": "2004",
+    "overview": "When a private satellite encounters an unidentified source of heat in Antarctica and it is found to be a pyramid buried deep underground , a search team comprising of top-of-the-line archaeologists and engineers is sent to Antarctica to find out more . Once there , the team comes across signs which indicate that the place is inhabited by an unknown alien species . It is not long before the aliens begin to hunt the team members . At the same time , a trio of coming-of-age Predators have arrived to collect the skulls of the aliens as trophies , and the humans are caught between a deadly battle between the two warring species .",
+    "genre": "Action, Adventure, Horror"
+  },
+  {
+    "id": "tt13623632",
+    "title": "Alien: Earth",
+    "year": "2025–",
+    "overview": "When a mysterious space vessel crash-lands on Earth, a young woman and a ragtag group of tactical soldiers make a fateful discovery that puts them face-to-face with the planet's greatest threat.",
+    "genre": "Horror, Sci-Fi, Thriller"
+  },
+  {
+    "id": "tt8690918",
+    "title": "Resident Alien",
+    "year": "2021–2025",
+    "overview": "An alien, who has crashed landed on earth on a mission to destroy humanity, assumes the identity of Dr. Harry Vanderspeigel, so he can remain undetected by the residents of Patience, CO while he searches the snow-covered Colorado Mountains for pieces of his ship. He learns \"to be human\" by watching Law and Order and mimicking the late, great Jerry Orbach. One day the sheriff of Patience, Mike \"Big Black\" Thompson and his deputy, Liv Baker, show up at his isolated cabin. There has been a murder in town and they need a doctor. The murder victim is the town doctor. Soon, he finds himself as the new town doctor and in constant contact with the people of the town. Something, until now, he has vehemently avoided. Now, as he is spending more time with humans, he is learning more about them and what makes them human. Which gives him pause, but is still determined to complete his mission to destroy the people of earth. He also discovers there is one person in town who can see him in his true form; which, of course, is less than ideal.",
+    "genre": "Comedy, Drama, Mystery"
+  },
+  {
+    "id": "tt0095687",
+    "title": "My Stepmother Is an Alien",
+    "year": "1988",
+    "overview": "An alien is sent on a secret mission to Earth, where she appears as a gorgeous, attractive, and single lady. Her mission is to make contact with a rather nerdy young scientist, who's quite overwhelmed by her attentions, and isn't aware of the connection between her arrival and his work.",
+    "genre": "Comedy, Sci-Fi"
   }
 ]

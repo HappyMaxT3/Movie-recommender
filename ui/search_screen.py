@@ -1,14 +1,13 @@
-# ui/search_screen.py
 from kivy.uix.screenmanager import Screen
 from kivy.uix.button import Button
-
-from app.recommender import Recommender
 from random import sample
 
-from .details_screen import open_movie_screen
+from app.recommender import Recommender
 from app.omdb_api import search_movies, get_movie_details
 from app.user_profile import get_user_data
 from app.cache import add_movie
+from .details_screen import open_movie_screen
+
 
 class SearchScreen(Screen):
 
@@ -16,13 +15,15 @@ class SearchScreen(Screen):
         self.load_recommendations()
 
     def refresh_recommendations(self):
-        self.load_recommendations()
+        if hasattr(self.ids, "recommendations_list"):
+            self.ids.recommendations_list.clear_widgets()
+            self.load_recommendations()
 
     def load_recommendations(self):
-        if not hasattr(self.ids, "results_list"):
+        if not hasattr(self.ids, "recommendations_list"):
             return
 
-        self.ids.results_list.clear_widgets()
+        self.ids.recommendations_list.clear_widgets()
         user_data = get_user_data()
         library_titles = {m["title"] for m in user_data.get("library", [])}
 
@@ -34,18 +35,24 @@ class SearchScreen(Screen):
 
         if not display_recs:
             btn = Button(text="No recommendations", size_hint_y=None, height=40)
-            self.ids.results_list.add_widget(btn)
+            self.ids.recommendations_list.add_widget(btn)
             return
 
         for movie in display_recs:
             btn = Button(text=f"{movie['title']} ({movie['year']})", size_hint_y=None, height=40)
             btn.bind(on_press=lambda x, m=movie: open_movie_screen(self.manager, m))
-            self.ids.results_list.add_widget(btn)
+            self.ids.recommendations_list.add_widget(btn)
 
     def search_movie(self):
-        query = self.ids.search_input.text
+        if not hasattr(self.ids, "search_results_list"):
+            return
+
+        query = self.ids.search_input.text.strip()
+        if not query:
+            return
+
         results = search_movies(query)
-        self.ids.results_list.clear_widgets()
+        self.ids.search_results_list.clear_widgets()
 
         for movie in results[:10]:
             movie_details = get_movie_details(movie["imdbID"])
@@ -57,9 +64,8 @@ class SearchScreen(Screen):
                     size_hint_y=None,
                     height=40
                 )
-
                 btn.bind(on_press=lambda x, m=movie_details: open_movie_screen(self.manager, m))
-                self.ids.results_list.add_widget(btn)
+                self.ids.search_results_list.add_widget(btn)
 
     def open_movie_detail(self, movie):
         details = get_movie_details(movie["imdbID"])
