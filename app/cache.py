@@ -2,7 +2,7 @@ import json
 import os
 import re
 
-CACHE_FILE = "data/movies.json"
+from app.config import CACHE_FILE
 
 
 def load_cache():

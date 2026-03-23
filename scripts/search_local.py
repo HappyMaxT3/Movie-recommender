@@ -1,6 +1,8 @@
 import json
 import re
+from app.recommender import Recommender
 
+from app.config import CACHE_FILE
 
 def clean_title(title):
     return re.sub(r"\(\d{4}\)", "", title).strip()
@@ -12,7 +14,7 @@ def normalize(text):
 
 
 def load_movies():
-    with open("data/movies.json", "r") as f:
+    with open(CACHE_FILE, "r") as f:
         return json.load(f)
 
 
@@ -40,6 +42,7 @@ def print_movie(movie):
 
 def main():
     movies = load_movies()
+    recommender = Recommender()
 
     print("=== Local Movie Search ===")
 
@@ -68,6 +71,16 @@ def main():
             continue
 
         print_movie(selected)
+
+        print("\n=== Recommendations ===")
+        recs = recommender.recommend(selected["title"])
+
+        if not recs:
+            print("No recommendations found")
+            continue
+
+        for r in recs:
+            print(f"- {r['title']} ({r['year']}) | {r['genre']} \n--- {r['overview']}")
 
 
 if __name__ == "__main__":

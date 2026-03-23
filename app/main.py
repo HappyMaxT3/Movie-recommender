@@ -1,14 +1,14 @@
 from app.omdb_api import search_movies, get_movie_details
 from app.cache import add_movie
-
+import time
 
 def main():
-    print("=== Movie Search CLI ===")
+    print("=== Movie Search CLI (API) ===")
 
     while True:
         query = input("\nEnter movie name (or '0' to exit): ")
 
-        if query.lower() == "0":
+        if query == "0":
             break
 
         results = search_movies(query)
@@ -29,6 +29,8 @@ def main():
                 and movie_details.get("year")
             ):
                 add_movie(movie_details)
+
+            time.sleep(0.2)  # от лимитов API
 
         print("All movies saved!\n")
 
