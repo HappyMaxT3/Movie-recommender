@@ -1,0 +1,11 @@
+{
+  "user_id": 1,
+  "ratings": {
+    "Blade Runner": 5,
+    "The Batman": 3.5
+  },
+  "library": [
+    "Blade Runner",
+    "The Batman"
+  ]
+}

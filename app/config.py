@@ -7,3 +7,4 @@ OMDB_API_KEY = os.getenv("OMDB_API_KEY")
 BASE_URL = "http://www.omdbapi.com/"
 
 CACHE_FILE = "data/movies.json"
+USER_FILE = "data/user.json"

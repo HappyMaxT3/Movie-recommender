@@ -1,8 +1,10 @@
 import json
 import re
-from app.recommender import Recommender
 
+from app.user_profile import add_rating, get_user_ratings
+from app.recommender import Recommender
 from app.config import CACHE_FILE
+
 
 def clean_title(title):
     return re.sub(r"\(\d{4}\)", "", title).strip()
@@ -20,7 +22,6 @@ def load_movies():
 
 def search_movies(query, movies):
     query = normalize(query)
-
     results = []
 
     for movie in movies:
@@ -32,19 +33,25 @@ def search_movies(query, movies):
     return results
 
 
+def shorten(text, max_len=200):
+    return text[:max_len] + "..." if len(text) > max_len else text
+
+
 def print_movie(movie):
     print("\n" + "=" * 50)
     print(f"Title: {movie['title']}")
     print(f"Year: {movie['year']}")
     print(f"Genre: {movie['genre']}")
-    print(f"Overview: {movie['overview']}")
+    print(f"Overview: {shorten(movie['overview'])}")
 
 
 def main():
     movies = load_movies()
     recommender = Recommender()
 
-    print("=== Local Movie Search ===")
+    ratings = get_user_ratings()
+    print(f"=== Local Movie Search ===")
+    print(f"Loaded {len(ratings)} rated movies")
 
     while True:
         query = input("\nEnter movie name (or '0' to exit): ")
@@ -72,6 +79,17 @@ def main():
 
         print_movie(selected)
 
+        # оценка
+        rate = input("\nRate this movie (1-5) or press Enter to skip: ")
+
+        if rate.isdigit():
+            rate = int(rate)
+            if 1 <= rate <= 5:
+                add_rating(selected["title"], rate)
+                print("Rating saved!")
+            else:
+                print("Invalid rating")
+
         print("\n=== Recommendations ===")
         recs = recommender.recommend(selected["title"])
 
@@ -80,8 +98,10 @@ def main():
             continue
 
         for r in recs:
-            print(f"- {r['title']} ({r['year']}) | {r['genre']} \n--- {r['overview']}")
-
+            print("\n" + "-" * 40)
+            print(f"Title: {r['title']} ({r['year']})")
+            print(f"Genre: {r['genre']}")
+            print(f"Overview: {shorten(r['overview'])}")
 
 if __name__ == "__main__":
     main()
