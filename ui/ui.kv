@@ -1,0 +1,45 @@
+#:kivy 2.0.0
+
+<MainLayout>:
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    TextInput:
+        id: search_input
+        hint_text: "Enter movie name"
+        size_hint_y: None
+        height: 40
+
+    Button:
+        text: "Search"
+        on_press: root.search()
+
+    Label:
+        id: results_label
+        text: "Results will appear here"
+        size_hint_y: 2
+
+    TextInput:
+        id: choice_input
+        hint_text: "Select number"
+        size_hint_y: None
+        height: 40
+
+    Button:
+        text: "Select Movie"
+        on_press: root.select_movie()
+
+    Button:
+        text: "Add to Library"
+        on_press: root.add_movie()
+
+    TextInput:
+        id: rating_input
+        hint_text: "Rating (0.5-5.0)"
+        size_hint_y: None
+        height: 40
+
+    Button:
+        text: "Rate Movie"
+        on_press: root.rate_movie()

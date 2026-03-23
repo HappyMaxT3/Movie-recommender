@@ -10,7 +10,7 @@ def search_movies(title):
 
     response = requests.get(BASE_URL, params=params)
     data = response.json()
-    print(data)
+    # print(data)
 
     if data.get("Response") == "False":
         return []
