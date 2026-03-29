@@ -78,3 +78,25 @@ class SearchScreen(Screen):
 
     def open_library(self):
         self.manager.current = "library"
+
+    def search_by_description(self):
+        if not hasattr(self.ids, "search_results_list"):
+            return
+
+        query = self.ids.search_input.text.strip()
+        if not query:
+            return
+
+        recommender = Recommender()
+        results = recommender.search_by_description(query)
+
+        self.ids.search_results_list.clear_widgets()
+
+        for movie in results:
+            btn = Button(
+                text=f"{movie['title']} ({movie['year']})",
+                size_hint_y=None,
+                height=40
+            )
+            btn.bind(on_press=lambda x, m=movie: open_movie_screen(self.manager, m))
+            self.ids.search_results_list.add_widget(btn)

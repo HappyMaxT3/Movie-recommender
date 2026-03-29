@@ -9,12 +9,15 @@ ScreenManager:
 <SearchScreen>:
     name: "search"
 
+<SearchScreen>:
+    name: "search"
+
     BoxLayout:
         orientation: "vertical"
         padding: 10
         spacing: 10
 
-        # --- Поле поиска + кнопка библиотека ---
+        # --- ЕДИНАЯ строка поиска ---
         BoxLayout:
             size_hint_y: None
             height: "40dp"
@@ -22,7 +25,7 @@ ScreenManager:
 
             TextInput:
                 id: search_input
-                hint_text: "Enter movie name"
+                hint_text: "Enter movie name or description"
                 multiline: False
 
             Button:
@@ -32,9 +35,15 @@ ScreenManager:
                 on_press: root.search_movie()
 
             Button:
-                text: "Show Library"
+                text: "By Meaning"
                 size_hint_x: None
                 width: "130dp"
+                on_press: root.search_by_description()
+
+            Button:
+                text: "Library"
+                size_hint_x: None
+                width: "100dp"
                 on_press: root.open_library()
 
         # --- Результаты поиска ---

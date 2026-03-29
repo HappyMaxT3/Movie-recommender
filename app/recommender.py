@@ -77,3 +77,27 @@ class Recommender:
 
         movie_indices = sim_df["index"].tolist()
         return self.df.iloc[movie_indices][["title", "year", "genre", "overview"]].to_dict("records")
+    
+    def search_by_description(self, query, top_n=10):
+        if not query:
+            return []
+
+        # превращаем текст в вектор
+        query_vec = self.vectorizer.transform([query])
+
+        # считаем схожесть
+        sim_scores = cosine_similarity(query_vec, self.tfidf_matrix).flatten()
+
+        # сортируем
+        sim_df = pd.DataFrame({
+            "index": self.df.index,
+            "score": sim_scores
+        })
+
+        sim_df = sim_df.sort_values("score", ascending=False).head(top_n)
+
+        movie_indices = sim_df["index"].tolist()
+
+        return self.df.iloc[movie_indices][
+            ["title", "year", "genre", "overview", "poster"]
+        ].to_dict("records")
