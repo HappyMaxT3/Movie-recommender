@@ -6,13 +6,13 @@ def open_movie_screen(manager, movie):
     screen.movie = movie
 
     screen.ids.title.text = f"{movie['title']} ({movie['year']})"
-    screen.ids.genre.text = movie["genre"]
-    screen.ids.overview.text = movie["overview"]
+    screen.ids.genre.text = movie.get("genre", "")
+    screen.ids.overview.text = movie.get("overview", "")
     screen.ids.rating_input.text = ""
 
     poster = movie.get("poster")
 
-    if poster and poster != "N/A":
+    if isinstance(poster, str) and poster and poster != "N/A":
         screen.ids.poster.source = poster
     else:
         # fallback 

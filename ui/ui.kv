@@ -9,9 +9,6 @@ ScreenManager:
 <SearchScreen>:
     name: "search"
 
-<SearchScreen>:
-    name: "search"
-
     BoxLayout:
         orientation: "vertical"
         padding: 10
@@ -29,9 +26,9 @@ ScreenManager:
                 multiline: False
 
             Button:
-                text: "Search"
+                text: "Search By Name"
                 size_hint_x: None
-                width: "100dp"
+                width: "130dp"
                 on_press: root.search_movie()
 
             Button:
@@ -73,7 +70,7 @@ ScreenManager:
                 bold: True
 
             Button:
-                text: "Refresh"
+                text: "Refresh recs"
                 size_hint_x: None
                 width: "100dp"
                 on_press: root.refresh_recommendations()
