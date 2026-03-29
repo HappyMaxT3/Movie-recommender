@@ -10,7 +10,7 @@ def search_movies(title):
 
     response = requests.get(BASE_URL, params=params)
     data = response.json()
-    print(data)
+    # print(data)
 
     if data.get("Response") == "False":
         return []
@@ -36,5 +36,6 @@ def get_movie_details(imdb_id):
         "title": data.get("Title"),
         "year": data.get("Year"),
         "overview": data.get("Plot"),
-        "genre": data.get("Genre")
+        "genre": data.get("Genre"),
+        "poster": data.get("Poster") 
     }

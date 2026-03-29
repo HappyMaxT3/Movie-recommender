@@ -1,0 +1,154 @@
+#:kivy 2.0.0
+
+ScreenManager:
+    SearchScreen:
+    DetailsScreen:
+    LibraryScreen:
+
+
+<SearchScreen>:
+    name: "search"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        spacing: 10
+
+        # --- Поле поиска + кнопка библиотека ---
+        BoxLayout:
+            size_hint_y: None
+            height: "40dp"
+            spacing: 10
+
+            TextInput:
+                id: search_input
+                hint_text: "Enter movie name"
+                multiline: False
+
+            Button:
+                text: "Search"
+                size_hint_x: None
+                width: "100dp"
+                on_press: root.search_movie()
+
+            Button:
+                text: "Show Library"
+                size_hint_x: None
+                width: "130dp"
+                on_press: root.open_library()
+
+        # --- Результаты поиска ---
+        Label:
+            text: "Search Results"
+            size_hint_y: None
+            height: "30dp"
+            bold: True
+
+        ScrollView:
+            size_hint_y: 0.45
+            GridLayout:
+                id: search_results_list
+                cols: 1
+                spacing: 5
+                size_hint_y: None
+                height: self.minimum_height
+
+        # --- Рекомендации ---
+        BoxLayout:
+            size_hint_y: None
+            height: "30dp"
+            spacing: 10
+
+            Label:
+                text: "Recommended for You"
+                bold: True
+
+            Button:
+                text: "Refresh"
+                size_hint_x: None
+                width: "100dp"
+                on_press: root.refresh_recommendations()
+
+        ScrollView:
+            size_hint_y: 0.45
+            GridLayout:
+                id: recommendations_list
+                cols: 1
+                spacing: 5
+                size_hint_y: None
+                height: self.minimum_height
+
+
+<DetailsScreen>:
+    name: "details"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        spacing: 10
+
+        AsyncImage:
+            id: poster
+            size_hint_y: 0.5
+
+        Label:
+            id: title
+            text: ""
+            size_hint_y: None
+            height: 40
+
+        Label:
+            id: genre
+            text: ""
+            size_hint_y: None
+            height: 30
+
+        ScrollView:
+            Label:
+                id: overview
+                text: ""
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+
+        TextInput:
+            id: rating_input
+            hint_text: "Rate (0.5–5.0)"
+            size_hint_y: None
+            height: 40
+
+        Button:
+            text: "Add to Library"
+            on_press: root.add_movie()
+
+        Button:
+            text: "Back"
+            on_press: app.root.current = "search"
+
+
+<LibraryScreen>:
+    name: "library"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: "Your Library"
+            size_hint_y: None
+            height: 40
+
+        ScrollView:
+            GridLayout:
+                id: library_list
+                cols: 1
+                spacing: 10
+                size_hint_y: None
+                height: self.minimum_height
+
+        Button:
+            text: "Back"
+            size_hint_y: None
+            height: 40
+            on_press: app.root.current = "search"

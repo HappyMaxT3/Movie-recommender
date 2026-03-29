@@ -1,8 +1,15 @@
 {
   "user_id": 1,
   "ratings": {
-    "Blade": 4.7,
-    "Blade II": 3.9
+    "Blade": 4.6,
+    "Blade II": 3.9,
+    "Blade Runner 2049": 4.9,
+    "The Batman": 3.8,
+    "Stalker": 5.0,
+    "Blade of the Immortal": 0.0,
+    "Avatar": 4.5,
+    "Alien": 5.0,
+    "Terminator 2: Judgment Day": 5.0
   },
   "library": [
     {
@@ -18,6 +25,55 @@
       "year": "2002",
       "overview": "A rare mutation has occurred within the vampire community. The Reaper. A vampire so consumed with an insatiable bloodlust that they prey on vampires as well as humans, transforming victims who are unlucky enough to survive into Reapers themselves. Now their quickly expanding population threatens the existence of vampires, and soon there won't be enough humans in the world to satisfy their bloodlust. Blade, Whistler and an armory expert named Scud are curiously summoned by the Shadow Council. The council reluctantly admits that they are in a dire situation and they require Blade's assistance. Blade then tenuously enters into an alliance with The Bloodpack, an elite team of vampires trained in all modes of combat to defeat the Reaper threat. Blade's team and the Bloodpack are the only line of defense which can prevent the Reaper population from wiping out the vampire and human populations.",
       "genre": "Action, Horror, Sci-Fi"
+    },
+    {
+      "id": "tt1877830",
+      "title": "The Batman",
+      "year": "2022",
+      "overview": "When a sadistic serial killer begins murdering key political figures in Gotham, the Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
+      "genre": "Action, Crime, Drama"
+    },
+    {
+      "id": "tt0079944",
+      "title": "Stalker",
+      "year": "1979",
+      "overview": "In a small, unnamed country there's an area called the Zone. It's an unusual area, and within its a place known as the Room, where it's believed wishes are granted. The government declared The Zone a no-go area and have sealed it off. This hasn't stopped people from entering the Zone. A writer, and a professor, want to reach the Zone. Their guide - a man known as a stalker, has a special relation with the Zone.",
+      "genre": "Drama, Sci-Fi"
+    },
+    {
+      "id": null,
+      "title": "Twelve Monkeys (1995)",
+      "year": "1995",
+      "overview": "In a future world devastated by disease, a convict is sent back in time to gather information about the man-made virus that wiped out most of the human population on the planet.",
+      "genre": "Mystery, Sci-Fi, Thriller"
+    },
+    {
+      "id": "tt5084170",
+      "title": "Blade of the Immortal",
+      "year": "2017",
+      "overview": "Manji, a highly skilled samurai, becomes cursed with immortality after a legendary battle. Haunted by the brutal murder of his sister, Manji knows that only fighting evil will regain his soul. He promises to help a young girl named Rin avenge her parents, who were killed by a group of master swordsmen led by ruthless warrior Anotsu. The mission will change Manji in ways he could never imagine.",
+      "genre": "Action, Drama"
+    },
+    {
+      "id": "tt0499549",
+      "title": "Avatar",
+      "year": "2009",
+      "overview": "When his brother is killed in a robbery, paraplegic Marine Jake Sully decides to take his place in a mission on the distant world of Pandora. There he learns of greedy corporate figurehead Parker Selfridge's intentions of driving off the native humanoid \"Na'vi\" in order to mine for the precious material scattered throughout their rich woodland. In exchange for the spinal surgery that will fix his legs, Jake gathers knowledge, of the Indigenous Race and their Culture, for the cooperating military unit spearheaded by gung-ho Colonel Quaritch, while simultaneously attempting to infiltrate the Na'vi people with the use of an \"avatar\" identity. While Jake begins to bond with the native tribe and quickly falls in love with the beautiful alien Neytiri, the restless Colonel moves forward with his ruthless extermination tactics, forcing the soldier to take a stand - and fight back in an epic battle for the fate of Pandora.",
+      "genre": "Action, Adventure, Fantasy"
+    },
+    {
+      "id": "tt0078748",
+      "title": "Alien",
+      "year": "1979",
+      "overview": "In the distant future, the crew of the commercial spaceship Nostromo are on their way home when they pick up a distress call from a distant moon. The crew are under obligation to investigate and the spaceship descends on the moon afterwards. After a rough landing, three crew members leave the spaceship to explore the area on the moon. At the same time as they discover a hive colony of some unknown creature, the ship's computer deciphers the message to be a warning, not a distress call. When one of the eggs is disturbed, the crew realizes that they are not alone on the spaceship and they must deal with the consequences.",
+      "genre": "Horror, Sci-Fi"
+    },
+    {
+      "id": "tt0103064",
+      "title": "Terminator 2: Judgment Day",
+      "year": "1991",
+      "overview": "Over 10 years have passed since the first machine called The Terminator tried to kill Sarah Connor and her unborn son, John. The man who will become the future leader of the human resistance against the Machines is now a healthy young boy. However, another Terminator, called the T-1000, is sent back through time by the supercomputer Skynet. This new Terminator is more advanced and more powerful than its predecessor and its mission is to kill John Connor when he's still a child. However, Sarah and John do not have to face the threat of the T-1000 alone. Another Terminator (identical to the same model that tried and failed to kill Sarah Connor in 1984) is also sent back through time to protect them. Now, the battle for tomorrow has begun.",
+      "genre": "Action, Adventure, Sci-Fi"
     }
   ]
 }
