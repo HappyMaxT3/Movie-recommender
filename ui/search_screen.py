@@ -1,5 +1,7 @@
 from kivy.uix.screenmanager import Screen
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.image import AsyncImage
 from random import sample
 
 from app.recommender import Recommender
@@ -29,7 +31,6 @@ class SearchScreen(Screen):
 
         recommender = Recommender()
         all_recs = recommender.recommend_for_user(top_n=20)
-
         new_recs = [m for m in all_recs if m["title"] not in library_titles]
         display_recs = sample(new_recs, min(10, len(new_recs))) if new_recs else []
 
@@ -39,9 +40,12 @@ class SearchScreen(Screen):
             return
 
         for movie in display_recs:
-            btn = Button(text=f"{movie['title']} ({movie['year']})", size_hint_y=None, height=40)
-            btn.bind(on_press=lambda x, m=movie: open_movie_screen(self.manager, m))
-            self.ids.recommendations_list.add_widget(btn)
+            movie_box = BoxLayout(orientation="horizontal", size_hint_y=None, height=120, spacing=10)
+            if movie.get("poster"):
+                movie_box.add_widget(AsyncImage(source=movie["poster"], size_hint_x=None, width=80))
+            movie_box.add_widget(Button(text=f"{movie['title']} ({movie['year']})",
+                                        on_press=lambda x, m=movie: open_movie_screen(self.manager, m)))
+            self.ids.recommendations_list.add_widget(movie_box)
 
     def search_movie(self):
         if not hasattr(self.ids, "search_results_list"):

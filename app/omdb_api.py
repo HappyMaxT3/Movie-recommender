@@ -36,5 +36,6 @@ def get_movie_details(imdb_id):
         "title": data.get("Title"),
         "year": data.get("Year"),
         "overview": data.get("Plot"),
-        "genre": data.get("Genre")
+        "genre": data.get("Genre"),
+        "poster": data.get("Poster") 
     }

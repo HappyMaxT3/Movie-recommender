@@ -8,6 +8,8 @@ def open_movie_screen(manager, movie):
     screen.ids.genre.text = movie["genre"]
     screen.ids.overview.text = movie["overview"]
     screen.ids.rating_input.text = ""
+    if movie.get("poster"):
+        screen.ids.poster.source = movie["poster"]
     manager.current = "details"
 
 

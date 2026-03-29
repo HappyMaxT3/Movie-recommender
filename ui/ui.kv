@@ -87,6 +87,10 @@ ScreenManager:
         padding: 10
         spacing: 10
 
+        AsyncImage:
+            id: poster
+            size_hint_y: 0.5
+
         Label:
             id: title
             text: ""
@@ -136,13 +140,15 @@ ScreenManager:
             height: 40
 
         ScrollView:
-            Label:
+            GridLayout:
                 id: library_list
-                text: ""
+                cols: 1
+                spacing: 10
                 size_hint_y: None
-                height: self.texture_size[1]
-                text_size: self.width, None
+                height: self.minimum_height
 
         Button:
             text: "Back"
+            size_hint_y: None
+            height: 40
             on_press: app.root.current = "search"
