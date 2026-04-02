@@ -21,31 +21,58 @@ class SearchScreen(Screen):
             self.ids.recommendations_list.clear_widgets()
             self.load_recommendations()
 
+    def create_movie_card(self, movie):
+        layout = BoxLayout(
+            orientation="horizontal",
+            size_hint_y=None,
+            height=130,
+            spacing=10
+        )
+
+        poster = movie.get("poster")
+        if not isinstance(poster, str) or poster == "N/A":
+            poster = ""
+
+        if poster:
+            layout.add_widget(
+                AsyncImage(
+                    source=poster,
+                    size_hint_x=None,
+                    width=90
+                )
+            )
+
+        text = f"{movie.get('title', '')} ({movie.get('year', '')})\n{movie.get('genre', '')}"
+
+        btn = Button(text=text)
+        btn.bind(on_press=lambda x: open_movie_screen(self.manager, movie))
+
+        layout.add_widget(btn)
+        return layout
+
     def load_recommendations(self):
         if not hasattr(self.ids, "recommendations_list"):
             return
 
         self.ids.recommendations_list.clear_widgets()
+
         user_data = get_user_data()
         library_titles = {m["title"] for m in user_data.get("library", [])}
 
         recommender = Recommender()
         all_recs = recommender.recommend_for_user(top_n=20)
+
         new_recs = [m for m in all_recs if m["title"] not in library_titles]
         display_recs = sample(new_recs, min(10, len(new_recs))) if new_recs else []
 
         if not display_recs:
-            btn = Button(text="No recommendations", size_hint_y=None, height=40)
-            self.ids.recommendations_list.add_widget(btn)
+            self.ids.recommendations_list.add_widget(
+                Button(text="No recommendations", size_hint_y=None, height=40)
+            )
             return
 
         for movie in display_recs:
-            movie_box = BoxLayout(orientation="horizontal", size_hint_y=None, height=120, spacing=10)
-            if movie.get("poster"):
-                movie_box.add_widget(AsyncImage(source=movie["poster"], size_hint_x=None, width=80))
-            movie_box.add_widget(Button(text=f"{movie['title']} ({movie['year']})",
-                                        on_press=lambda x, m=movie: open_movie_screen(self.manager, m)))
-            self.ids.recommendations_list.add_widget(movie_box)
+            self.ids.recommendations_list.add_widget(self.create_movie_card(movie))
 
     def search_movie(self):
         if not hasattr(self.ids, "search_results_list"):
@@ -62,22 +89,9 @@ class SearchScreen(Screen):
             movie_details = get_movie_details(movie["imdbID"])
             if movie_details:
                 add_movie(movie_details)
-
-                btn = Button(
-                    text=f"{movie_details['title']} ({movie_details['year']})",
-                    size_hint_y=None,
-                    height=40
+                self.ids.search_results_list.add_widget(
+                    self.create_movie_card(movie_details)
                 )
-                btn.bind(on_press=lambda x, m=movie_details: open_movie_screen(self.manager, m))
-                self.ids.search_results_list.add_widget(btn)
-
-    def open_movie_detail(self, movie):
-        details = get_movie_details(movie["imdbID"])
-        if details:
-            open_movie_screen(self.manager, details)
-
-    def open_library(self):
-        self.manager.current = "library"
 
     def search_by_description(self):
         if not hasattr(self.ids, "search_results_list"):
@@ -93,10 +107,9 @@ class SearchScreen(Screen):
         self.ids.search_results_list.clear_widgets()
 
         for movie in results:
-            btn = Button(
-                text=f"{movie['title']} ({movie['year']})",
-                size_hint_y=None,
-                height=40
+            self.ids.search_results_list.add_widget(
+                self.create_movie_card(movie)
             )
-            btn.bind(on_press=lambda x, m=movie: open_movie_screen(self.manager, m))
-            self.ids.search_results_list.add_widget(btn)
+
+    def open_library(self):
+        self.manager.current = "library"
