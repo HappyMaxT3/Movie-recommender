@@ -48,14 +48,13 @@ ScreenManager:
             text: "Search Results"
             size_hint_y: None
             height: "30dp"
-            bold: True
 
         ScrollView:
             size_hint_y: 0.45
             GridLayout:
                 id: search_results_list
                 cols: 1
-                spacing: 5
+                spacing: 10
                 size_hint_y: None
                 height: self.minimum_height
 
@@ -63,16 +62,14 @@ ScreenManager:
         BoxLayout:
             size_hint_y: None
             height: "30dp"
-            spacing: 10
 
             Label:
                 text: "Recommended for You"
-                bold: True
 
             Button:
                 text: "Refresh recs"
                 size_hint_x: None
-                width: "100dp"
+                width: "120dp"
                 on_press: root.refresh_recommendations()
 
         ScrollView:
@@ -80,10 +77,44 @@ ScreenManager:
             GridLayout:
                 id: recommendations_list
                 cols: 1
-                spacing: 5
+                spacing: 10
                 size_hint_y: None
                 height: self.minimum_height
 
+<MovieItem@BoxLayout>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: "120dp"
+    spacing: 10
+    padding: 5
+
+    AsyncImage:
+        id: poster
+        size_hint_x: None
+        width: "80dp"
+        source: root.poster if root.poster else ""
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            id: title
+            text: root.title
+            bold: True
+            size_hint_y: None
+            height: "30dp"
+            text_size: self.width, None
+
+        Label:
+            id: genre
+            text: root.genre
+            size_hint_y: None
+            height: "25dp"
+
+        Label:
+            id: overview
+            text: root.overview
+            text_size: self.width, None
 
 <DetailsScreen>:
     name: "details"
@@ -156,5 +187,5 @@ ScreenManager:
         Button:
             text: "Back"
             size_hint_y: None
-            height: 40
+            height: 100
             on_press: app.root.current = "search"

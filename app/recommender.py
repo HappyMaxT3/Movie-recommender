@@ -43,7 +43,9 @@ class Recommender:
         sim_df = sim_df[sim_df["index"] != idx]
         sim_df = sim_df.sort_values("score", ascending=False).head(top_n)
 
-        return self.df.iloc[sim_df["index"]][["title", "year", "genre", "overview"]].to_dict("records")
+        return self._safe_movies(
+            self.df.iloc[sim_df["index"]][["title", "year", "genre", "overview", "poster"]]
+        )
 
     # персональные рекомендации
     def recommend_for_user(self, top_n=5):
@@ -76,7 +78,9 @@ class Recommender:
         sim_df = sim_df.sort_values("score", ascending=False).head(top_n)
 
         movie_indices = sim_df["index"].tolist()
-        return self.df.iloc[movie_indices][["title", "year", "genre", "overview"]].to_dict("records")
+        return self._safe_movies(
+            self.df.iloc[movie_indices][["title", "year", "genre", "overview", "poster"]]
+        )
     
     def search_by_description(self, query, top_n=10):
         if not query:
@@ -98,6 +102,16 @@ class Recommender:
 
         movie_indices = sim_df["index"].tolist()
 
-        return self.df.iloc[movie_indices][
-            ["title", "year", "genre", "overview", "poster"]
-        ].to_dict("records")
+        return self._safe_movies(
+            self.df.iloc[movie_indices][
+                ["title", "year", "genre", "overview", "poster"]
+            ]
+        )
+    
+    def _safe_movies(self, df_slice):
+        movies = df_slice.to_dict("records")
+
+        for m in movies:
+            if "poster" not in m or not isinstance(m["poster"], str):
+                m["poster"] = ""
+        return movies

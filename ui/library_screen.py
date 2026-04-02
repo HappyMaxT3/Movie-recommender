@@ -25,9 +25,8 @@ class LibraryScreen(Screen):
             return
 
         for movie in library:
-            rating = ratings.get(movie["title"], "—")
+            rating = ratings.get(movie.get("title", ""), "—")
 
-            # --- Карточка фильма ---
             card = BoxLayout(
                 orientation="horizontal",
                 size_hint_y=None,
@@ -36,51 +35,49 @@ class LibraryScreen(Screen):
                 padding=5
             )
 
-            # --- Постер ---
-            poster_url = movie.get("poster", "")
-
-            if poster_url and poster_url != "N/A":
-                poster = AsyncImage(
-                    source=poster_url,
-                    size_hint_x=None,
-                    width=100
-                )
+            poster_url = movie.get("poster")
+            if isinstance(poster_url, str) and poster_url and poster_url != "N/A":
+                poster = AsyncImage(source=poster_url, size_hint_x=None, width=100)
             else:
-                poster = Label(
-                    text="No Image",
+                poster = AsyncImage(
+                    source="ui/images/no_poster.jpg",
                     size_hint_x=None,
                     width=100
                 )
 
-            # --- Текст справа ---
-            text = BoxLayout(orientation="vertical")
+            text = BoxLayout(
+                orientation="vertical",
+                size_hint_x=1
+            )
 
             text.add_widget(Label(
-                text=f"{movie['title']} ({movie['year']})",
-                bold=True,
+                text=f"{movie.get('title', '')} ({movie.get('year', '')})",
                 size_hint_y=None,
-                height=30
+                height=30,
+                text_size=(self.width - 120, None)
             ))
 
             text.add_widget(Label(
-                text=f"Genre: {movie['genre']}",
+                text=f"Genre: {movie.get('genre', '')}",
                 size_hint_y=None,
-                height=25
+                height=25,
+                text_size=(self.width - 120, None)
             ))
 
             text.add_widget(Label(
                 text=f"Rating: {rating}",
                 size_hint_y=None,
-                height=25
+                height=25,
+                text_size=(self.width - 120, None)
             ))
 
             text.add_widget(Label(
-                text=movie["overview"][:120] + "...",
+                text=(movie.get("overview", "")[:120] + "..."),
                 size_hint_y=None,
-                height=60
+                height=70,
+                text_size=(self.width - 120, None)
             ))
 
-            # --- собираем ---
             card.add_widget(poster)
             card.add_widget(text)
 
