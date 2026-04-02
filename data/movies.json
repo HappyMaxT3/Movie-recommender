@@ -7655,5 +7655,61 @@
     "overview": "A group of seven magicians gets chosen to become masters of seven classes of heroic spirits, in order to fight and win the Holy Grail.",
     "genre": "Animation, Action, Adventure",
     "poster": "https://m.media-amazon.com/images/M/MV5BZTNmZWI3ZWYtNjkzYi00ZTFkLWI0MzctMjc2YzlmNGRkNzRiXkEyXkFqcGc@._V1_SX300.jpg"
+  },
+  {
+    "id": "tt4649466",
+    "title": "Kingsman: The Golden Circle",
+    "year": "2017",
+    "overview": "After the Kingsman headquarters are blown up by a psychotic criminal named Poppy Adams (Julianne Moore), the surviving agents find their way to an allied secret organization based in Kentucky, named \"Statesman\". The two agencies must now work together in order to save the world and take down the so called \"Golden Circle\".",
+    "genre": "Action, Adventure, Comedy",
+    "poster": "https://m.media-amazon.com/images/M/MV5BMjQ3OTgzMzY4NF5BMl5BanBnXkFtZTgwOTc4OTQyMzI@._V1_SX300.jpg"
+  },
+  {
+    "id": "tt5026378",
+    "title": "Kingsman: The Secret Service Revealed",
+    "year": "2015",
+    "overview": "A documentary on Kingsman: The Secret Service.",
+    "genre": "Documentary",
+    "poster": "https://m.media-amazon.com/images/M/MV5BYmI4YTMzNWUtM2RmMy00NzRiLTlmZDMtNWZhMGVkMzNlMzgxXkEyXkFqcGdeQXVyNDI3NzQxODA@._V1_SX300.jpg"
+  },
+  {
+    "id": "tt8918212",
+    "title": "#TBT to That Time Archer Met Kingsman",
+    "year": "2017",
+    "overview": "Digital short that sees the self-proclaimed \"World's Greatest Spy\" (Sterling Archer), come face-to-face with Kingsman super agent, Gary \"Eggsy\" Unwin. Debuted exclusively at San Diego Comic-Con (2017).",
+    "genre": "Animation, Short, Comedy",
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmZkMTlkNzAtNTNjMi00OTI5LTgxZDUtY2QxOTViZTk2MGJlXkEyXkFqcGc@._V1_SX300.jpg"
+  },
+  {
+    "id": "tt7959890",
+    "title": "Kingsman: Inside the Golden Circle",
+    "year": "2017",
+    "overview": "N/A",
+    "genre": "Documentary",
+    "poster": "N/A"
+  },
+  {
+    "id": "tt6597836",
+    "title": "Kingsman: Bespoke Lessons for Gentlemen Spies",
+    "year": "2015",
+    "overview": "An animated series of adventures that double as lessons in Kingsman style.",
+    "genre": "Animation, Action, Adventure",
+    "poster": "https://m.media-amazon.com/images/M/MV5BMWExMjc3NjMtY2U1OS00MTAzLTg2MGQtYTdlOGUwZTY4ZjAxXkEyXkFqcGdeQXVyMTg0MzQ5MQ@@._V1_SX300.jpg"
+  },
+  {
+    "id": "tt7214770",
+    "title": "The Making of Kingsman: The Golden Circle",
+    "year": "2017",
+    "overview": "N/A",
+    "genre": "Documentary",
+    "poster": "N/A"
+  },
+  {
+    "id": "tt24265982",
+    "title": "Episode 101 - Kingsman: The Secret Service (2014)",
+    "year": "2014",
+    "overview": "N/A",
+    "genre": "N/A",
+    "poster": "N/A"
   }
 ]
