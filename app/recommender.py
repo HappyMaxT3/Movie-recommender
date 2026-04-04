@@ -1,11 +1,14 @@
 import json
 import numpy as np
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 from app.config import CACHE_FILE
 from app.user_profile import get_user_data
+
+from app.embedding_model import get_model
+from app.embeddings_store import load_or_create_embeddings
+
 
 class Recommender:
     def __init__(self):
@@ -14,19 +17,32 @@ class Recommender:
 
         self.df = pd.DataFrame(movies)
 
-        # Комбинируем текст
+        if self.df.empty:
+            self.embeddings = np.array([])
+            self.indices = {}
+            return
+
+        # текст
         self.df["combined"] = (
             self.df["overview"].fillna("") + " " + self.df["genre"].fillna("")
         )
 
-        # TF-IDF
-        self.vectorizer = TfidfVectorizer(stop_words="english")
-        self.tfidf_matrix = self.vectorizer.fit_transform(self.df["combined"])
+        # модель
+        self.model = get_model()
 
-        # Индекс по названию
-        self.indices = pd.Series(self.df.index, index=self.df["title"]).drop_duplicates()
+        # embeddings
+        self.embeddings = load_or_create_embeddings(
+            self.df["combined"].tolist()
+        )
 
-    # рекомендации от фильма
+        # индекс
+        self.indices = pd.Series(
+            self.df.index, index=self.df["title"]
+        ).drop_duplicates()
+
+    # ======================
+    # FROM MOVIE
+    # ======================
     def recommend_from_movie(self, title, top_n=5):
         if title not in self.indices:
             return []
@@ -34,84 +50,87 @@ class Recommender:
         idx = self.indices[title]
 
         sim_scores = cosine_similarity(
-            self.tfidf_matrix[idx], self.tfidf_matrix
+            [self.embeddings[idx]], self.embeddings
         ).flatten()
 
-        sim_df = pd.DataFrame({"index": self.df.index, "score": sim_scores})
+        return self._top_results(sim_scores, exclude_idx=idx, top_n=top_n)
 
-        # убираем сам фильм
-        sim_df = sim_df[sim_df["index"] != idx]
-        sim_df = sim_df.sort_values("score", ascending=False).head(top_n)
-
-        return self._safe_movies(
-            self.df.iloc[sim_df["index"]][["title", "year", "genre", "overview", "poster"]]
-        )
-
-    # персональные рекомендации
+    # ======================
+    # PERSONAL
+    # ======================
     def recommend_for_user(self, top_n=5):
         user_data = get_user_data()
         ratings = user_data.get("ratings", {})
         library = user_data.get("library", [])
 
-        library_titles = {movie["title"] for movie in library}
+        library_titles = {m["title"] for m in library}
 
-        # фильмы с оценкой >= 4.0
-        liked_titles = [title for title, r in ratings.items() if r >= 4.0]
+        liked_titles = [t for t, r in ratings.items() if r >= 3.0]
         if not liked_titles:
             return []
 
-        liked_indices = [self.indices[title] for title in liked_titles if title in self.indices]
+        liked_indices = [
+            self.indices[t] for t in liked_titles if t in self.indices
+        ]
         if not liked_indices:
             return []
 
-        # создаём user-вектор
-        liked_matrix = self.tfidf_matrix[liked_indices]
-        user_vector = liked_matrix.mean(axis=0)
-        user_vector = np.asarray(user_vector)
+        user_vector = np.mean(self.embeddings[liked_indices], axis=0)
 
-        # cosine similarity
-        sim_scores = cosine_similarity(user_vector, self.tfidf_matrix).flatten()
+        sim_scores = cosine_similarity(
+            [user_vector], self.embeddings
+        ).flatten()
 
-        sim_df = pd.DataFrame({"index": self.df.index, "score": sim_scores})
-
-        sim_df = sim_df[~self.df["title"].isin(library_titles)]
-        sim_df = sim_df.sort_values("score", ascending=False).head(top_n)
-
-        movie_indices = sim_df["index"].tolist()
-        return self._safe_movies(
-            self.df.iloc[movie_indices][["title", "year", "genre", "overview", "poster"]]
+        return self._top_results(
+            sim_scores,
+            exclude_titles=library_titles,
+            top_n=top_n
         )
-    
+
+    # ======================
+    # SEARCH
+    # ======================
     def search_by_description(self, query, top_n=10):
         if not query:
             return []
 
-        # превращаем текст в вектор
-        query_vec = self.vectorizer.transform([query])
+        query_vec = self.model.encode([query])
 
-        # считаем схожесть
-        sim_scores = cosine_similarity(query_vec, self.tfidf_matrix).flatten()
+        sim_scores = cosine_similarity(
+            query_vec, self.embeddings
+        ).flatten()
 
-        # сортируем
-        sim_df = pd.DataFrame({
-            "index": self.df.index,
-            "score": sim_scores
-        })
+        return self._top_results(sim_scores, top_n=top_n)
 
-        sim_df = sim_df.sort_values("score", ascending=False).head(top_n)
+    # ======================
+    # CORE
+    # ======================
+    def _top_results(self, sim_scores, top_n=5, exclude_idx=None, exclude_titles=None):
+        sim_scores = np.array(sim_scores)
 
-        movie_indices = sim_df["index"].tolist()
+        df = self.df.copy()
+        df["score"] = sim_scores
+
+        if exclude_idx is not None:
+            df = df[df.index != exclude_idx]
+
+        if exclude_titles:
+            df = df[~df["title"].isin(exclude_titles)]
+
+        df = df.sort_values("score", ascending=False).head(top_n)
 
         return self._safe_movies(
-            self.df.iloc[movie_indices][
-                ["title", "year", "genre", "overview", "poster"]
-            ]
+            df[["title", "year", "genre", "overview", "poster"]]
         )
-    
+
+    # ======================
+    # SAFE OUTPUT
+    # ======================
     def _safe_movies(self, df_slice):
         movies = df_slice.to_dict("records")
 
         for m in movies:
-            if "poster" not in m or not isinstance(m["poster"], str):
+            if not isinstance(m.get("poster", ""), str):
                 m["poster"] = ""
+
         return movies

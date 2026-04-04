@@ -10,7 +10,11 @@
     "Avatar": 4.5,
     "Alien": 5.0,
     "Terminator 2: Judgment Day": 5.0,
-    "Kingsman: The Secret Service": 3.5
+    "Kingsman: The Secret Service": 3.5,
+    "WALL\u00b7E (2008)": 5.0,
+    "The Fifth Element (1997)": 5.0,
+    "Star Wars: Episode III - Revenge of the Sith": 5.0,
+    "Star Wars: Episode IV - A New Hope": 5.0
   },
   "library": [
     {
@@ -82,6 +86,34 @@
       "year": "2014",
       "overview": "A young man named Gary \"Eggsy\" Unwin (Taron Egerton), whose father died when he was a young boy, is dealing with living with the creep his mother is with now, who mistreats her and him. He goes out and does something to one of the creep's friends. He gets arrested and he calls the number a man gave him around the time his father died, to call if he needs help. A man named Harry Hart (Colin Firth) approaches him and tells him he's the one who helped him. He tells him that he knew his father. When the man Eggsy slighted wants some payback, Harry takes care of him and his companions single-handedly. Harry then tells Eggsy that he's part of a secret organization called \"The Kingsman\", and his father was also part of it. He died trying to make the world safe. Harry offers Eggsy the opportunity to be a Kingsman, and he takes it. He undergoes a gruelling training course. Harry is looking into the demise of another Kingsman, and the trail leads him to tech billionaire Valentine, a.k.a. \"V\" (Samuel L. Jackson), who is also curious about the group following him, the Kingsman.",
       "genre": "Action, Adventure, Comedy"
+    },
+    {
+      "id": null,
+      "title": "WALL\u00b7E (2008)",
+      "year": "2008",
+      "overview": "In the distant future, a small waste-collecting robot inadvertently embarks on a space journey that will ultimately decide the fate of mankind.",
+      "genre": "Animation, Adventure, Family"
+    },
+    {
+      "id": null,
+      "title": "The Fifth Element (1997)",
+      "year": "1997",
+      "overview": "In the colorful future, a cab driver unwittingly becomes the central figure in the search for a legendary cosmic weapon to keep Evil and Mr. Zorg at bay.",
+      "genre": "Action, Adventure, Sci-Fi"
+    },
+    {
+      "id": "tt0121766",
+      "title": "Star Wars: Episode III - Revenge of the Sith",
+      "year": "2005",
+      "overview": "Nearly three years have passed since the beginning of the Clone Wars. The Republic, with the help of the Jedi, take on Count Dooku and the Separatists. With a new threat rising, the Jedi Council sends Obi-Wan Kenobi and Anakin Skywalker to aid the captured Chancellor. Anakin feels he is ready to be promoted to Jedi Master. Obi-Wan is hunting down the Separatist General, Grievous. When Anakin has future visions of pain and suffering coming Padm\u00e9's way, he sees Master Yoda for counsel. When Darth Sidious executes Order 66, it destroys most of all the Jedi have built. Experience the birth of Darth Vader. Feel the betrayal that leads to hatred between two brothers. And witness the power of hope.",
+      "genre": "Action, Adventure, Fantasy"
+    },
+    {
+      "id": "tt0076759",
+      "title": "Star Wars: Episode IV - A New Hope",
+      "year": "1977",
+      "overview": "The Imperial Forces, under orders from cruel Darth Vader, hold Princess Leia hostage in their efforts to quell the rebellion against the Galactic Empire. Luke Skywalker and Han Solo, captain of the Millennium Falcon, work together with the companionable droid duo R2-D2 and C-3PO to rescue the beautiful princess, help the Rebel Alliance and restore freedom and justice to the Galaxy.",
+      "genre": "Action, Adventure, Fantasy"
     }
   ]
 }

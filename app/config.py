@@ -8,3 +8,5 @@ BASE_URL = "http://www.omdbapi.com/"
 
 CACHE_FILE = "data/movies.json"
 USER_FILE = "data/user.json"
+
+EMBEDDINGS_FILE = "data/embeddings.npy"
